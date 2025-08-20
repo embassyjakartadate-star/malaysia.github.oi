@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kementerian Luar Negeri Malaysia</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #003366;
+            --secondary-color: #0066cc;
+            --accent-color: #ffcc00;
+            --text-color: #333333;
+            --light-bg: #f8f9fa;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-color);
+            background-color: #ffffff;
+        }
+        
+        .top-bar {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 8px 0;
+            font-size: 14px;
+        }
+        
+        .top-bar a {
+            color: white;
+            text-decoration: none;
+            margin-right: 15px;
+        }
+        
+        .top-bar a:hover {
+            color: var(--accent-color);
+        }
+        
+        .header {
+            background-color: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .logo {
+            max-height: 70px;
+        }
+        
+        .navbar {
+            background-color: var(--primary-color);
+            border-radius: 0;
+            margin-bottom: 0;
+        }
+        
+        .navbar-nav .nav-link {
+            color: white !important;
+            font-weight: 500;
+            padding: 12px 15px;
+            transition: all 0.3s;
+        }
+        
+        .navbar-nav .nav-link:hover {
+            background-color: var(--secondary-color);
+        }
+        
+        .hero-section {
+            background: linear-gradient(rgba(0, 51, 102, 0.7), rgba(0, 51, 102, 0.7)), url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS54f4CKP1oBFlP7huuJQ8UlI0mhzqLoNdd2Q&s');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .hero-section h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .hero-section p {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+        
+        .btn-custom {
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+            font-weight: 600;
+            padding: 12px 30px;
+            border-radius: 4px;
+            border: none;
+            transition: all 0.3s;
+            font-size: 1.1rem;
+        }
+        
+        .btn-custom:hover {
+            background-color: #e6b800;
+            color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+        
+        .section-title {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 30px;
+            position: relative;
+            padding-bottom: 15px;
+            font-size: 1.8rem;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 70px;
+            height: 4px;
+            background-color: var(--accent-color);
+        }
+        
+        .card {
+            border: none;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+        
+        .card-img-top {
+            height: 220px;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .card:hover .card-img-top {
+            transform: scale(1.05);
+        }
+        
+        .card-body {
+            padding: 20px;
+        }
+        
+        .card-title {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+        
+        .footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 50px 0 20px;
+        }
+        
+        .footer h5 {
+            color: var(--accent-color);
+            font-size: 18px;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        .footer ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .footer ul li {
+            margin-bottom: 12px;
+        }
+        
+        .footer a {
+            color: #cccccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer a:hover {
+            color: white;
+        }
+        
+        .copyright {
+            background-color: #002244;
+            color: #cccccc;
+            padding: 20px 0;
+            text-align: center;
+            font-size: 14px;
+        }
+        
+        .login-btn {
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+            font-weight: 600;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+        
+        .login-btn:hover {
+            background-color: #e6b800;
+            color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+        
+        .modal-content {
+            border-radius: 10px;
+            border: none;
+            overflow: hidden;
+        }
+        
+        .modal-header {
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 10px 10px 0 0;
+        }
+        
+        .btn-google {
+            background-color: #dd4b39;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 6px;
+            font-weight: 500;
+            width: 100%;
+            margin-bottom: 20px;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+        
+        .btn-google:hover {
+            background-color: #c23321;
+            color: white;
+        }
+        
+        .btn-google i {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .form-control {
+            border-radius: 6px;
+            padding: 12px;
+            border: 1px solid #ddd;
+        }
+        
+        .form-control:focus {
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 0.25rem rgba(0, 102, 204, 0.25);
+        }
+        
+        .nav-tabs .nav-link {
+            color: var(--primary-color);
+            font-weight: 500;
+            border-radius: 6px 6px 0 0;
+            padding: 12px 20px;
+        }
+        
+        .nav-tabs .nav-link.active {
+            color: var(--secondary-color);
+            font-weight: 600;
+            background-color: #f8f9fa;
+            border-color: #dee2e6 #dee2e6 #f8f9fa;
+        }
+        
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            border-radius: 6px;
+            color: white;
+            font-weight: 500;
+            z-index: 1050;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            opacity: 0;
+            transition: opacity 0.3s, transform 0.3s;
+            transform: translateY(-20px);
+        }
+        
+        .notification.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .notification.success {
+            background-color: #28a745;
+        }
+        
+        .notification.error {
+            background-color: #dc3545;
+        }
+        
+        .news-card {
+            margin-bottom: 25px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+        }
+        
+        .news-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .news-card-img {
+            height: 200px;
+            object-fit: cover;
+            width: 100%;
+        }
+        
+        .news-card-body {
+            padding: 20px;
+        }
+        
+        .news-card-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        
+        .news-card-text {
+            color: #666;
+            margin-bottom: 15px;
+        }
+        
+        .news-card-date {
+            font-size: 0.9rem;
+            color: #999;
+        }
+        
+        .small-news-card {
+            display: flex;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+        }
+        
+        .small-news-card:hover {
+            transform: translateY(-3px);
+        }
+        
+        .small-news-img {
+            width: 120px;
+            height: 100px;
+            object-fit: cover;
+        }
+        
+        .small-news-content {
+            padding: 15px;
+            flex: 1;
+        }
+        
+        .small-news-title {
+            font-weight: 600;
+            color: var(--primary-color);
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+        
+        .small-news-date {
+            font-size: 0.8rem;
+            color: #999;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-section h1 {
+                font-size: 2rem;
+            }
+            
+            .hero-section p {
+                font-size: 1.1rem;
+            }
+            
+            .navbar-nav {
+                text-align: center;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .card-img-top {
+                height: 180px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <i class="fas fa-envelope me-2"></i> info@kln.gov.my
+                </div>
+                <div class="col-md-6 text-end">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-4">
+                    <img src="https://www.kln.gov.my/image/layout_set_logo?img_id=8605014&t=1755688550171" alt="Logo Kementerian Luar Negeri" class="logo">
+                </div>
+                <div class="col-md-8 text-end">
+                    <button class="login-btn" data-bs-toggle="modal" data-bs-target="#authModal">
+                        <i class="fas fa-sign-in-alt me-2"></i> Login / Daftar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Beranda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Tentang Kami</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Layanan</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Berita</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Kontak</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <h1>Kementerian Luar Negeri Malaysia</h1>
+            <p>Mewujudkan hubungan antarabangsa yang mantap untuk keselamatan, kemakmuran dan kesejahteraan Malaysia</p>
+            <a href="#" class="btn btn-custom btn-lg">Pelajari Lebih Lanjut</a>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="section-title">Layanan Kami</h2>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS54f4CKP1oBFlP7huuJQ8UlI0mhzqLoNdd2Q&s" class="card-img-top" alt="Passport Service">
+                        <div class="card-body">
+                            <h5 class="card-title">Layanan Paspor</h5>
+                            <p class="card-text">Informasi lengkap mengenai pengurusan paspor Malaysia di luar negeri.</p>
+                            <a href="#" class="btn btn-sm btn-custom">Selengkapnya</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTV_pikAbPoweZqIwbazazRxQV7ihTbpdVSSrl_CDG5Quz_ka5d5FGq8vp72FjNtwBcyjk&usqp=CAU" class="card-img-top" alt="Consular Service">
+                        <div class="card-body">
+                            <h5 class="card-title">Layanan Konsuler</h5>
+                            <p class="card-text">Bantuan hukum dan perlindungan untuk warga Malaysia di luar negeri.</p>
+                            <a href="#" class="btn btn-sm btn-custom">Selengkapnya</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpWZd7xftTPD9qBL5IpxI1EBZ_SBgFRevfjRFjy-7yLgKd-MMaRosz9_2CDHtaMO1Yttk&usqp=CAU" class="card-img-top" alt="Visa Service">
+                        <div class="card-body">
+                            <h5 class="card-title">Layanan Visa</h5>
+                            <p class="card-text">Informasi persyaratan dan prosedur pengajuan visa ke Malaysia.</p>
+                            <a href="#" class="btn btn-sm btn-custom">Selengkapnya</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- News Section -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title">Berita Terkini</h2>
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="news-card">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS54f4CKP1oBFlP7huuJQ8UlI0mhzqLoNdd2Q&s" class="news-card-img" alt="News Image">
+                        <div class="news-card-body">
+                            <h5 class="news-card-title">Kunjungan Kerja Menteri Luar Negeri ke Indonesia</h5>
+                            <p class="news-card-text">Menteri Luar Negeri Malaysia akan melakukan kunjungan kerja ke Indonesia untuk membahas isu-isu bilateral dan regional. Kunjungan ini diharapkan dapat memperkuat hubungan diplomatik antara kedua negara.</p>
+                            <p class="news-card-date"><i class="far fa-calendar-alt me-2"></i>15 Oktober 2023</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="small-news-card">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTV_pikAbPoweZqIwbazazRxQV7ihTbpdVSSrl_CDG5Quz_ka5d5FGq8vp72FjNtwBcyjk&usqp=CAU" class="small-news-img" alt="News Image">
+                        <div class="small-news-content">
+                            <h6 class="small-news-title">Pembukaan Konsulat Baru di Surabaya</h6>
+                            <p class="small-news-date"><i class="far fa-calendar-alt me-2"></i>10 Oktober 2023</p>
+                        </div>
+                    </div>
+                    <div class="small-news-card">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpWZd7xftTPD9qBL5IpxI1EBZ_SBgFRevfjRFjy-7yLgKd-MMaRosz9_2CDHtaMO1Yttk&usqp=CAU" class="small-news-img" alt="News Image">
+                        <div class="small-news-content">
+                            <h6 class="small-news-title">Program Beasiswa Diplomatik 2024</h6>
+                            <p class="small-news-date"><i class="far fa-calendar-alt me-2"></i>5 Oktober 2023</p>
+                        </div>
+                    </div>
+                    <div class="small-news-card">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS54f4CKP1oBFlP7huuJQ8UlI0mhzqLoNdd2Q&s" class="small-news-img" alt="News Image">
+                        <div class="small-news-content">
+                            <h6 class="small-news-title">Peringatan Hari Diplomasi Malaysia</h6>
+                            <p class="small-news-date"><i class="far fa-calendar-alt me-2"></i>1 Oktober 2023</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>Tentang Kami</h5>
+                    <p>Kementerian Luar Negeri Malaysia bertanggungjawab dalam menguruskan hubungan luar negara Malaysia serta mewakili Malaysia di peringkat antarabangsa.</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Pautan Pantas</h5>
+                    <ul>
+                        <li><a href="#">Laman Web Rasmi</a></li>
+                        <li><a href="#">Hubungi Kami</a></li>
+                        <li><a href="#">Soalan Lazim</a></li>
+                        <li><a href="#">Panduan Perjalanan</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Maklumat Hubungan</h5>
+                    <p><i class="fas fa-map-marker-alt me-2"></i> Wisma Putra, No. 1, Jalan Wisma Putra, Precint 2, 62602 Putrajaya, Malaysia</p>
+                    <p><i class="fas fa-phone me-2"></i> +603-8000 8000</p>
+                    <p><i class="fas fa-envelope me-2"></i> info@kln.gov.my</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div class="copyright">
+        <div class="container">
+            <p>&copy; 2023 Hak Cipta Terpelihara Kementerian Luar Negeri Malaysia</p>
+        </div>
+    </div>
+
+    <!-- Authentication Modal -->
+    <div class="modal fade" id="authModal" tabindex="-1" aria-labelledby="authModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="authModalLabel">Login / Daftar</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center mb-4">
+                        <img src="https://www.kln.gov.my/image/layout_set_logo?img_id=8605014&t=1755688550171" alt="Logo" height="60">
+                    </div>
+                    
+                    <!-- Google Sign-In Button -->
+                    <div class="d-grid">
+                        <button class="btn btn-google" id="googleSignInBtn">
+                            <i class="fab fa-google"></i> Masuk dengan Google
+                        </button>
+                    </div>
+                    
+                    <div class="text-center my-3">
+                        <span>atau</span>
+                    </div>
+                    
+                    <!-- Tabs for Login and Register -->
+                    <ul class="nav nav-tabs mb-3" id="authTabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="login-tab" data-bs-toggle="tab" data-bs-target="#login" type="button" role="tab" aria-controls="login" aria-selected="true">Login</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="register-tab" data-bs-toggle="tab" data-bs-target="#register" type="button" role="tab" aria-controls="register" aria-selected="false">Daftar</button>
+                        </li>
+                    </ul>
+                    
+                    <!-- Tab Content -->
+                    <div class="tab-content" id="authTabsContent">
+                        <!-- Login Tab -->
+                        <div class="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="login-tab">
+                            <form id="loginForm">
+                                <div class="mb-3">
+                                    <label for="loginEmail" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="loginEmail" placeholder="Masukkan email" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="loginPassword" class="form-label">Kata Sandi</label>
+                                    <input type="password" class="form-control" id="loginPassword" placeholder="Masukkan kata sandi" required>
+                                </div>
+                                <div class="mb-3 form-check">
+                                    <input type="checkbox" class="form-check-input" id="rememberMe">
+                                    <label class="form-check-label" for="rememberMe">Ingat saya</label>
+                                </div>
+                                <div class="d-grid">
+                                    <button type="submit" class="btn btn-custom">Masuk</button>
+                                </div>
+                            </form>
+                            <div class="text-center mt-3">
+                                <p><a href="#" id="forgotPasswordLink">Lupa kata sandi?</a></p>
+                            </div>
+                        </div>
+                        
+                        <!-- Register Tab -->
+                        <div class="tab-pane fade" id="register" role="tabpanel" aria-labelledby="register-tab">
+                            <form id="registerForm">
+                                <div class="mb-3">
+                                    <label for="registerName" class="form-label">Nama Lengkap</label>
+                                    <input type="text" class="form-control" id="registerName" placeholder="Masukkan nama lengkap" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="registerEmail" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="registerEmail" placeholder="Masukkan email" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="registerPassword" class="form-label">Kata Sandi</label>
+                                    <input type="password" class="form-control" id="registerPassword" placeholder="Masukkan kata sandi" required>
+                                    <div class="form-text">Kata sandi minimal 6 karakter</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="confirmPassword" class="form-label">Konfirmasi Kata Sandi</label>
+                                    <input type="password" class="form-control" id="confirmPassword" placeholder="Konfirmasi kata sandi" required>
+                                </div>
+                                <div class="mb-3 form-check">
+                                    <input type="checkbox" class="form-check-input" id="agreeTerms" required>
+                                    <label class="form-check-label" for="agreeTerms">Saya setuju dengan <a href="#">syarat dan ketentuan</a></label>
+                                </div>
+                                <div class="d-grid">
+                                    <button type="submit" class="btn btn-custom">Daftar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div id="notification" class="notification"></div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore-compat.js"></script>
+    
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyCQLLM5_c85jxnTXn6J-R_jdLgKxo-VO_o",
+            authDomain: "blacklist-e75b3.firebaseapp.com",
+            projectId: "blacklist-e75b3",
+            storageBucket: "blacklist-e75b3.firebasestorage.app",
+            messagingSenderId: "263946397404",
+            appId: "1:263946397404:web:ef0ca956ccbe351971b619",
+            measurementId: "G-WDJRPCVEXQ"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+
+        // Show notification
+        function showNotification(message, type) {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.className = 'notification ' + type;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        // Google Sign-In
+        const googleSignInBtn = document.getElementById('googleSignInBtn');
+        googleSignInBtn.addEventListener('click', () => {
+            const provider = new firebase.auth.GoogleAuthProvider();
+            auth.signInWithPopup(provider)
+                .then((result) => {
+                    // Save user data to Firestore
+                    const user = result.user;
+                    saveUserData(user);
+                    
+                    // Show success notification
+                    showNotification('Login berhasil! Mengalihkan ke dashboard...', 'success');
+                    
+                    // Redirect to dashboard
+                    setTimeout(() => {
+                        window.location.href = 'dashboard.html';
+                    }, 1500);
+                })
+                .catch((error) => {
+                    console.error('Error signing in with Google:', error);
+                    showNotification('Gagal masuk dengan Google: ' + error.message, 'error');
+                });
+        });
+
+        // Email/Password Sign-In
+        const loginForm = document.getElementById('loginForm');
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            auth.signInWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                    // Signed in
+                    const user = userCredential.user;
+                    
+                    // Show success notification
+                    showNotification('Login berhasil! Mengalihkan ke dashboard...', 'success');
+                    
+                    // Redirect to dashboard
+                    setTimeout(() => {
+                        window.location.href = 'dashboard.html';
+                    }, 1500);
+                })
+                .catch((error) => {
+                    console.error('Error signing in:', error);
+                    showNotification('Gagal masuk: ' + error.message, 'error');
+                });
+        });
+
+        // Register with Email/Password
+        const registerForm = document.getElementById('registerForm');
+        registerForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const name = document.getElementById('registerName').value;
+            const email = document.getElementById('registerEmail').value;
+            const password = document.getElementById('registerPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            // Validate password
+            if (password !== confirmPassword) {
+                showNotification('Kata sandi tidak cocok!', 'error');
+                return;
+            }
+            
+            if (password.length < 6) {
+                showNotification('Kata sandi minimal 6 karakter!', 'error');
+                return;
+            }
+            
+            auth.createUserWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                    // Signed in
+                    const user = userCredential.user;
+                    
+                    // Update user profile with name
+                    user.updateProfile({
+                        displayName: name
+                    }).then(() => {
+                        // Save user data to Firestore
+                        saveUserData(user);
+                        
+                        // Show success notification
+                        showNotification('Pendaftaran berhasil! Mengalihkan ke dashboard...', 'success');
+                        
+                        // Redirect to dashboard
+                        setTimeout(() => {
+                            window.location.href = 'dashboard.html';
+                        }, 1500);
+                    }).catch((error) => {
+                        console.error('Error updating profile:', error);
+                        showNotification('Gagal memperbarui profil: ' + error.message, 'error');
+                    });
+                })
+                .catch((error) => {
+                    console.error('Error creating user:', error);
+                    showNotification('Gagal mendaftar: ' + error.message, 'error');
+                });
+        });
+
+        // Forgot Password
+        const forgotPasswordLink = document.getElementById('forgotPasswordLink');
+        forgotPasswordLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            
+            const email = document.getElementById('loginEmail').value;
+            
+            if (!email) {
+                showNotification('Silakan masukkan email Anda terlebih dahulu', 'error');
+                return;
+            }
+            
+            auth.sendPasswordResetEmail(email)
+                .then(() => {
+                    showNotification('Email reset kata sandi telah dikirim!', 'success');
+                })
+                .catch((error) => {
+                    console.error('Error sending password reset email:', error);
+                    showNotification('Gagal mengirim email reset: ' + error.message, 'error');
+                });
+        });
+
+        // Save user data to Firestore
+        function saveUserData(user) {
+            db.collection('users').doc(user.uid).set({
+                name: user.displayName || '',
+                email: user.email,
+                photoURL: user.photoURL || '',
+                createdAt: firebase.firestore.FieldValue.serverTimestamp()
+            })
+            .then(() => {
+                console.log('User data saved successfully');
+            })
+            .catch((error) => {
+                console.error('Error saving user data:', error);
+            });
+        }
+
+        // Check if user is already signed in
+        auth.onAuthStateChanged((user) => {
+            if (user) {
+                // User is signed in, redirect to dashboard
+                window.location.href = 'dashboard.html';
+            }
+        });
+    </script>
+</body>
+</html>

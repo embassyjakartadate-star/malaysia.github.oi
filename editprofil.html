@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profil - Kementerian Luar Negeri Malaysia</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #003366;
+            --secondary-color: #0066cc;
+            --accent-color: #ffcc00;
+            --text-color: #333333;
+            --light-bg: #f8f9fa;
+            --success-color: #28a745;
+            --danger-color: #dc3545;
+            --warning-color: #ffc107;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-color);
+            background-color: #f5f5f5;
+        }
+        
+        .top-bar {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 8px 0;
+            font-size: 14px;
+        }
+        
+        .top-bar a {
+            color: white;
+            text-decoration: none;
+            margin-right: 15px;
+        }
+        
+        .top-bar a:hover {
+            color: var(--accent-color);
+        }
+        
+        .header {
+            background-color: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .logo {
+            max-height: 70px;
+        }
+        
+        .navbar {
+            background-color: var(--primary-color);
+            border-radius: 0;
+            margin-bottom: 0;
+        }
+        
+        .navbar-nav .nav-link {
+            color: white !important;
+            font-weight: 500;
+            padding: 12px 15px;
+            transition: all 0.3s;
+        }
+        
+        .navbar-nav .nav-link:hover {
+            background-color: var(--secondary-color);
+        }
+        
+        .navbar-nav .nav-link.active {
+            background-color: var(--secondary-color);
+        }
+        
+        .profile-container {
+            padding: 40px 0;
+        }
+        
+        .profile-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+        }
+        
+        .profile-title {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 15px;
+            font-size: 1.8rem;
+            text-align: center;
+        }
+        
+        .profile-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background-color: var(--accent-color);
+        }
+        
+        .profile-avatar-section {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .profile-avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid var(--light-bg);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin-bottom: 15px;
+        }
+        
+        .avatar-upload-btn {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .avatar-upload-btn input[type=file] {
+            position: absolute;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+        
+        .form-section {
+            margin-bottom: 30px;
+        }
+        
+        .section-title {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+            font-size: 1.3rem;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--accent-color);
+        }
+        
+        .form-control, .form-select {
+            border-radius: 6px;
+            padding: 12px;
+            border: 1px solid #ddd;
+        }
+        
+        .form-control:focus, .form-select:focus {
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 0.25rem rgba(0, 102, 204, 0.25);
+        }
+        
+        .form-label {
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: var(--text-color);
+        }
+        
+        .form-text {
+            font-size: 0.875rem;
+            color: #6c757d;
+        }
+        
+        .btn-custom {
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+            font-weight: 600;
+            padding: 12px 30px;
+            border-radius: 6px;
+            border: none;
+            transition: all 0.3s;
+        }
+        
+        .btn-custom:hover {
+            background-color: #e6b800;
+            color: var(--primary-color);
+        }
+        
+        .btn-outline-custom {
+            background-color: transparent;
+            color: var(--secondary-color);
+            font-weight: 600;
+            padding: 10px 25px;
+            border-radius: 6px;
+            border: 1px solid var(--secondary-color);
+            transition: all 0.3s;
+        }
+        
+        .btn-outline-custom:hover {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+        
+        .password-strength {
+            margin-top: 10px;
+            height: 5px;
+            border-radius: 3px;
+            background-color: #eee;
+        }
+        
+        .password-strength-meter {
+            height: 100%;
+            border-radius: 3px;
+            width: 0;
+            transition: width 0.3s, background-color 0.3s;
+        }
+        
+        .strength-weak {
+            width: 33.33%;
+            background-color: var(--danger-color);
+        }
+        
+        .strength-medium {
+            width: 66.66%;
+            background-color: var(--warning-color);
+        }
+        
+        .strength-strong {
+            width: 100%;
+            background-color: var(--success-color);
+        }
+        
+        .footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 40px 0 20px;
+            margin-top: 50px;
+        }
+        
+        .footer h5 {
+            color: var(--accent-color);
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        
+        .footer ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .footer ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer a {
+            color: #cccccc;
+            text-decoration: none;
+        }
+        
+        .footer a:hover {
+            color: white;
+        }
+        
+        .copyright {
+            background-color: #002244;
+            color: #cccccc;
+            padding: 15px 0;
+            text-align: center;
+            font-size: 14px;
+        }
+        
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            border-radius: 6px;
+            color: white;
+            font-weight: 500;
+            z-index: 1050;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            opacity: 0;
+            transition: opacity 0.3s, transform 0.3s;
+            transform: translateY(-20px);
+        }
+        
+        .notification.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .notification.success {
+            background-color: #28a745;
+        }
+        
+        .notification.error {
+            background-color: #dc3545;
+        }
+        
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+        
+        .loading-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .loading-spinner {
+            width: 80px;
+            height: 80px;
+            border: 8px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--accent-color);
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        .loading-text {
+            color: white;
+            font-size: 1.2rem;
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .security-tips {
+            background-color: #e7f3ff;
+            border-left: 4px solid var(--secondary-color);
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+        
+        .security-tips h5 {
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+        }
+        
+        .security-tips ul {
+            margin-bottom: 0;
+            padding-left: 20px;
+        }
+        
+        .security-tips li {
+            margin-bottom: 5px;
+        }
+        
+        @media (max-width: 768px) {
+            .profile-card {
+                padding: 20px;
+            }
+            
+            .profile-title {
+                font-size: 1.5rem;
+            }
+            
+            .profile-avatar {
+                width: 120px;
+                height: 120px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div>
+            <div class="loading-spinner"></div>
+            <div class="loading-text">Memperbarui profil Anda...</div>
+        </div>
+    </div>
+    
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <i class="fas fa-envelope me-2"></i> info@kln.gov.my
+                </div>
+                <div class="col-md-6 text-end">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-4">
+                    <img src="https://www.kln.gov.my/image/layout_set_logo?img_id=8605014&t=1755688550171" alt="Logo Kementerian Luar Negeri" class="logo">
+                </div>
+                <div class="col-md-8 text-end">
+                    <a href="dashboard.html" class="btn btn-outline-custom">
+                        <i class="fas fa-arrow-left me-2"></i> Kembali ke Dashboard
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Beranda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="dashboard.html">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Edit Profil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Layanan</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Kontak</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Profile Content -->
+    <div class="profile-container">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="profile-card">
+                        <h2 class="profile-title">Edit Profil Pengguna</h2>
+                        
+                        <!-- Avatar Section -->
+                        <div class="profile-avatar-section">
+                            <img id="profileAvatar" src="https://i.imgur.com/KeqFd1g.png" alt="Profile Avatar" class="profile-avatar">
+                            <div>
+                                <div class="avatar-upload-btn">
+                                    <button class="btn btn-outline-custom">
+                                        <i class="fas fa-camera me-2"></i> Ganti Foto Profil
+                                    </button>
+                                    <input type="file" id="avatarUpload" accept="image/*">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Security Tips -->
+                        <div class="security-tips">
+                            <h5><i class="fas fa-shield-alt me-2"></i> Tips Keamanan Akun</h5>
+                            <ul>
+                                <li>Gunakan kata sandi yang kuat dengan kombinasi huruf besar, huruf kecil, angka, dan simbol</li>
+                                <li>Jangan bagikan informasi login Anda kepada orang lain</li>
+                                <li>Perbarui kata sandi secara berkala untuk keamanan akun Anda</li>
+                                <li>Aktifkan verifikasi dua faktor jika tersedia</li>
+                            </ul>
+                        </div>
+                        
+                        <form id="profileForm">
+                            <!-- Personal Information -->
+                            <div class="form-section">
+                                <h3 class="section-title">Informasi Pribadi</h3>
+                                
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="fullName" class="form-label">Nama Lengkap</label>
+                                        <input type="text" class="form-control" id="fullName" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="email" class="form-label">Email</label>
+                                        <input type="email" class="form-control" id="email" required>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="phone" class="form-label">Nomor Telepon</label>
+                                        <input type="tel" class="form-control" id="phone">
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="idNumber" class="form-label">Nomor Identitas (KTP/Paspor)</label>
+                                        <input type="text" class="form-control" id="idNumber">
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="address" class="form-label">Alamat Lengkap</label>
+                                    <textarea class="form-control" id="address" rows="3"></textarea>
+                                </div>
+                            </div>
+                            
+                            <!-- Password Section -->
+                            <div class="form-section">
+                                <h3 class="section-title">Ubah Kata Sandi</h3>
+                                <p class="form-text">Kosongkan bagian ini jika Anda tidak ingin mengubah kata sandi</p>
+                                
+                                <div class="mb-3">
+                                    <label for="currentPassword" class="form-label">Kata Sandi Saat Ini</label>
+                                    <input type="password" class="form-control" id="currentPassword">
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="newPassword" class="form-label">Kata Sandi Baru</label>
+                                    <input type="password" class="form-control" id="newPassword">
+                                    <div class="password-strength">
+                                        <div class="password-strength-meter" id="passwordStrengthMeter"></div>
+                                    </div>
+                                    <div class="form-text">Minimal 8 karakter dengan kombinasi huruf, angka, dan simbol</div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="confirmPassword" class="form-label">Konfirmasi Kata Sandi Baru</label>
+                                    <input type="password" class="form-control" id="confirmPassword">
+                                </div>
+                            </div>
+                            
+                            <!-- Notification Preferences -->
+                            <div class="form-section">
+                                <h3 class="section-title">Preferensi Notifikasi</h3>
+                                
+                                <div class="mb-3">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="emailNotifications" checked>
+                                        <label class="form-check-label" for="emailNotifications">
+                                            Terima notifikasi melalui email
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="smsNotifications">
+                                        <label class="form-check-label" for="smsNotifications">
+                                            Terima notifikasi melalui SMS
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="pushNotifications" checked>
+                                        <label class="form-check-label" for="pushNotifications">
+                                            Terima notifikasi push di browser
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Action Buttons -->
+                            <div class="d-flex justify-content-between mt-4">
+                                <a href="dashboard.html" class="btn btn-outline-custom">Batal</a>
+                                <button type="submit" class="btn btn-custom">
+                                    <i class="fas fa-save me-2"></i> Simpan Perubahan
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>Tentang Kami</h5>
+                    <p>Kementerian Luar Negeri Malaysia bertanggungjawab dalam menguruskan hubungan luar negara Malaysia serta mewakili Malaysia di peringkat antarabangsa.</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Pautan Pantas</h5>
+                    <ul>
+                        <li><a href="#">Laman Web Rasmi</a></li>
+                        <li><a href="#">Hubungi Kami</a></li>
+                        <li><a href="#">Soalan Lazim</a></li>
+                        <li><a href="#">Panduan Perjalanan</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Maklumat Hubungan</h5>
+                    <p><i class="fas fa-map-marker-alt me-2"></i> Wisma Putra, No. 1, Jalan Wisma Putra, Precint 2, 62602 Putrajaya, Malaysia</p>
+                    <p><i class="fas fa-phone me-2"></i> +603-8000 8000</p>
+                    <p><i class="fas fa-envelope me-2"></i> info@kln.gov.my</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <div class="copyright">
+        <div class="container">
+            <p>&copy; 2023 Hak Cipta Terpelihara Kementerian Luar Negeri Malaysia</p>
+        </div>
+    </div>
+    
+    <!-- Notification -->
+    <div id="notification" class="notification"></div>
+    
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-storage-compat.js"></script>
+    
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyCQLLM5_c85jxnTXn6J-R_jdLgKxo-VO_o",
+            authDomain: "blacklist-e75b3.firebaseapp.com",
+            projectId: "blacklist-e75b3",
+            storageBucket: "blacklist-e75b3.firebasestorage.app",
+            messagingSenderId: "263946397404",
+            appId: "1:263946397404:web:ef0ca956ccbe351971b619",
+            measurementId: "G-WDJRPCVEXQ"
+        };
+        
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+        const storage = firebase.storage();
+        
+        // Show notification
+        function showNotification(message, type) {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.className = 'notification ' + type;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 5000);
+        }
+        
+        // Show/hide loading overlay
+        function showLoading(show) {
+            const loadingOverlay = document.getElementById('loadingOverlay');
+            if (show) {
+                loadingOverlay.classList.add('active');
+            } else {
+                loadingOverlay.classList.remove('active');
+            }
+        }
+        
+        // Check password strength
+        function checkPasswordStrength(password) {
+            const meter = document.getElementById('passwordStrengthMeter');
+            
+            if (!password) {
+                meter.className = 'password-strength-meter';
+                return;
+            }
+            
+            // Reset classes
+            meter.className = 'password-strength-meter';
+            
+            // Check strength
+            let strength = 0;
+            
+            // Length check
+            if (password.length >= 8) strength += 1;
+            
+            // Complexity checks
+            if (password.match(/[a-z]+/)) strength += 1; // lowercase letters
+            if (password.match(/[A-Z]+/)) strength += 1; // uppercase letters
+            if (password.match(/[0-9]+/)) strength += 1; // numbers
+            if (password.match(/[$@#&!]+/)) strength += 1; // special characters
+            
+            // Update meter based on strength
+            if (strength <= 2) {
+                meter.classList.add('strength-weak');
+            } else if (strength <= 3) {
+                meter.classList.add('strength-medium');
+            } else {
+                meter.classList.add('strength-strong');
+            }
+        }
+        
+        // Load user profile data
+        function loadUserProfile() {
+            showLoading(true);
+            
+            auth.onAuthStateChanged(user => {
+                if (user) {
+                    // Get user data from Firestore
+                    db.collection('users').doc(user.uid).get()
+                        .then(doc => {
+                            if (doc.exists) {
+                                const userData = doc.data();
+                                
+                                // Populate form fields
+                                document.getElementById('fullName').value = userData.fullName || '';
+                                document.getElementById('email').value = user.email;
+                                document.getElementById('phone').value = userData.phone || '';
+                                document.getElementById('idNumber').value = userData.idNumber || '';
+                                document.getElementById('address').value = userData.address || '';
+                                
+                                // Set notification preferences
+                                document.getElementById('emailNotifications').checked = userData.emailNotifications !== false;
+                                document.getElementById('smsNotifications').checked = userData.smsNotifications || false;
+                                document.getElementById('pushNotifications').checked = userData.pushNotifications !== false;
+                                
+                                // Set profile avatar if available
+                                if (userData.profileImage) {
+                                    document.getElementById('profileAvatar').src = userData.profileImage;
+                                }
+                            }
+                            showLoading(false);
+                        })
+                        .catch(error => {
+                            console.error('Error loading user profile:', error);
+                            showNotification('Gagal memuat data profil. Silakan coba lagi.', 'error');
+                            showLoading(false);
+                        });
+                } else {
+                    // User not logged in, redirect to login page
+                    window.location.href = 'login.html';
+                }
+            });
+        }
+        
+        // Setup event listeners
+        function setupEventListeners() {
+            // Password strength meter
+            document.getElementById('newPassword').addEventListener('input', function() {
+                checkPasswordStrength(this.value);
+            });
+            
+            // Avatar upload preview
+            document.getElementById('avatarUpload').addEventListener('change', function(e) {
+                if (e.target.files && e.target.files[0]) {
+                    const reader = new FileReader();
+                    
+                    reader.onload = function(e) {
+                        document.getElementById('profileAvatar').src = e.target.result;
+                    }
+                    
+                    reader.readAsDataURL(e.target.files[0]);
+                }
+            });
+            
+            // Form submission
+            document.getElementById('profileForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                showLoading(true);
+                
+                const user = auth.currentUser;
+                if (!user) {
+                    showNotification('Anda harus masuk untuk memperbarui profil.', 'error');
+                    showLoading(false);
+                    return;
+                }
+                
+                // Get form values
+                const fullName = document.getElementById('fullName').value;
+                const phone = document.getElementById('phone').value;
+                const idNumber = document.getElementById('idNumber').value;
+                const address = document.getElementById('address').value;
+                const currentPassword = document.getElementById('currentPassword').value;
+                const newPassword = document.getElementById('newPassword').value;
+                const confirmPassword = document.getElementById('confirmPassword').value;
+                
+                // Get notification preferences
+                const emailNotifications = document.getElementById('emailNotifications').checked;
+                const smsNotifications = document.getElementById('smsNotifications').checked;
+                const pushNotifications = document.getElementById('pushNotifications').checked;
+                
+                // Validate password if provided
+                if (newPassword) {
+                    if (newPassword !== confirmPassword) {
+                        showNotification('Kata sandi baru dan konfirmasi tidak cocok.', 'error');
+                        showLoading(false);
+                        return;
+                    }
+                    
+                    if (newPassword.length < 8) {
+                        showNotification('Kata sandi baru minimal harus 8 karakter.', 'error');
+                        showLoading(false);
+                        return;
+                    }
+                }
+                
+                // Prepare user data object
+                const userData = {
+                    fullName,
+                    phone,
+                    idNumber,
+                    address,
+                    emailNotifications,
+                    smsNotifications,
+                    pushNotifications,
+                    updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+                };
+                
+                // Update user profile in Firestore
+                db.collection('users').doc(user.uid).update(userData)
+                    .then(() => {
+                        // Handle password update if provided
+                        if (newPassword) {
+                            const credential = firebase.auth.EmailAuthProvider.credential(
+                                user.email, 
+                                currentPassword
+                            );
+                            
+                            // Re-authenticate user first
+                            user.reauthenticateWithCredential(credential)
+                                .then(() => {
+                                    // Update password
+                                    return user.updatePassword(newPassword);
+                                })
+                                .then(() => {
+                                    // Handle avatar upload if provided
+                                    const avatarFile = document.getElementById('avatarUpload').files[0];
+                                    if (avatarFile) {
+                                        const storageRef = storage.ref();
+                                        const avatarRef = storageRef.child(`avatars/${user.uid}`);
+                                        
+                                        return avatarRef.put(avatarFile)
+                                            .then(snapshot => {
+                                                return snapshot.ref.getDownloadURL();
+                                            })
+                                            .then(downloadURL => {
+                                                // Update profile image URL in Firestore
+                                                return db.collection('users').doc(user.uid).update({
+                                                    profileImage: downloadURL
+                                                });
+                                            });
+                                    }
+                                })
+                                .then(() => {
+                                    showNotification('Profil berhasil diperbarui!', 'success');
+                                    showLoading(false);
+                                    
+                                    // Reset password fields
+                                    document.getElementById('currentPassword').value = '';
+                                    document.getElementById('newPassword').value = '';
+                                    document.getElementById('confirmPassword').value = '';
+                                    document.getElementById('passwordStrengthMeter').className = 'password-strength-meter';
+                                })
+                                .catch(error => {
+                                    console.error('Error updating password:', error);
+                                    
+                                    if (error.code === 'auth/wrong-password') {
+                                        showNotification('Kata sandi saat ini salah.', 'error');
+                                    } else {
+                                        showNotification('Gagal memperbarui kata sandi. Silakan coba lagi.', 'error');
+                                    }
+                                    
+                                    showLoading(false);
+                                });
+                        } else {
+                            // Handle avatar upload if provided
+                            const avatarFile = document.getElementById('avatarUpload').files[0];
+                            if (avatarFile) {
+                                const storageRef = storage.ref();
+                                const avatarRef = storageRef.child(`avatars/${user.uid}`);
+                                
+                                avatarRef.put(avatarFile)
+                                    .then(snapshot => {
+                                        return snapshot.ref.getDownloadURL();
+                                    })
+                                    .then(downloadURL => {
+                                        // Update profile image URL in Firestore
+                                        return db.collection('users').doc(user.uid).update({
+                                            profileImage: downloadURL
+                                        });
+                                    })
+                                    .then(() => {
+                                        showNotification('Profil berhasil diperbarui!', 'success');
+                                        showLoading(false);
+                                    })
+                                    .catch(error => {
+                                        console.error('Error uploading avatar:', error);
+                                        showNotification('Gagal mengunggah foto profil. Silakan coba lagi.', 'error');
+                                        showLoading(false);
+                                    });
+                            } else {
+                                showNotification('Profil berhasil diperbarui!', 'success');
+                                showLoading(false);
+                            }
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error updating profile:', error);
+                        showNotification('Gagal memperbarui profil. Silakan coba lagi.', 'error');
+                        showLoading(false);
+                    });
+            });
+        }
+        
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            loadUserProfile();
+            setupEventListeners();
+        });
+    </script>
+</body>
+</html>

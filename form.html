@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Permohonan Blacklist - Kementerian Luar Negeri Malaysia</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #003366;
+            --secondary-color: #0066cc;
+            --accent-color: #ffcc00;
+            --text-color: #333333;
+            --light-bg: #f8f9fa;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-color);
+            background-color: #f5f5f5;
+        }
+        
+        .top-bar {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 8px 0;
+            font-size: 14px;
+        }
+        
+        .top-bar a {
+            color: white;
+            text-decoration: none;
+            margin-right: 15px;
+        }
+        
+        .top-bar a:hover {
+            color: var(--accent-color);
+        }
+        
+        .header {
+            background-color: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .logo {
+            max-height: 70px;
+        }
+        
+        .navbar {
+            background-color: var(--primary-color);
+            border-radius: 0;
+            margin-bottom: 0;
+        }
+        
+        .navbar-nav .nav-link {
+            color: white !important;
+            font-weight: 500;
+            padding: 12px 15px;
+            transition: all 0.3s;
+        }
+        
+        .navbar-nav .nav-link:hover {
+            background-color: var(--secondary-color);
+        }
+        
+        .form-container {
+            padding: 40px 0;
+        }
+        
+        .form-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        
+        .form-title {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 15px;
+            font-size: 1.5rem;
+        }
+        
+        .form-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 70px;
+            height: 3px;
+            background-color: var(--accent-color);
+        }
+        
+        .form-section {
+            margin-bottom: 30px;
+        }
+        
+        .section-title {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .form-control, .form-select {
+            border-radius: 6px;
+            padding: 12px;
+            border: 1px solid #ddd;
+        }
+        
+        .form-control:focus, .form-select:focus {
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 0.25rem rgba(0, 102, 204, 0.25);
+        }
+        
+        .form-label {
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: var(--text-color);
+        }
+        
+        .form-text {
+            font-size: 0.875rem;
+            color: #6c757d;
+        }
+        
+        .btn-custom {
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+            font-weight: 600;
+            padding: 12px 30px;
+            border-radius: 6px;
+            border: none;
+            transition: all 0.3s;
+        }
+        
+        .btn-custom:hover {
+            background-color: #e6b800;
+            color: var(--primary-color);
+        }
+        
+        .btn-outline-custom {
+            background-color: transparent;
+            color: var(--secondary-color);
+            font-weight: 600;
+            padding: 10px 25px;
+            border-radius: 6px;
+            border: 1px solid var(--secondary-color);
+            transition: all 0.3s;
+        }
+        
+        .btn-outline-custom:hover {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+        
+        .footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 40px 0 20px;
+            margin-top: 50px;
+        }
+        
+        .footer h5 {
+            color: var(--accent-color);
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        
+        .footer ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .footer ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer a {
+            color: #cccccc;
+            text-decoration: none;
+        }
+        
+        .footer a:hover {
+            color: white;
+        }
+        
+        .copyright {
+            background-color: #002244;
+            color: #cccccc;
+            padding: 15px 0;
+            text-align: center;
+            font-size: 14px;
+        }
+        
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            border-radius: 6px;
+            color: white;
+            font-weight: 500;
+            z-index: 1050;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            opacity: 0;
+            transition: opacity 0.3s, transform 0.3s;
+            transform: translateY(-20px);
+        }
+        
+        .notification.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .notification.success {
+            background-color: #28a745;
+        }
+        
+        .notification.error {
+            background-color: #dc3545;
+        }
+        
+        .file-upload-wrapper {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            width: 100%;
+        }
+        
+        .file-upload-wrapper input[type=file] {
+            position: absolute;
+            top: 0;
+            right: 0;
+            min-width: 100%;
+            min-height: 100%;
+            font-size: 100px;
+            text-align: right;
+            filter: alpha(opacity=0);
+            opacity: 0;
+            outline: none;
+            cursor: pointer;
+            display: block;
+        }
+        
+        .file-upload-label {
+            display: block;
+            padding: 10px 15px;
+            background-color: var(--light-bg);
+            border: 1px dashed #ddd;
+            border-radius: 6px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .file-upload-label:hover {
+            background-color: #e9ecef;
+        }
+        
+        .file-upload-label i {
+            margin-right: 8px;
+            color: var(--secondary-color);
+        }
+        
+        .uploaded-files {
+            margin-top: 10px;
+        }
+        
+        .uploaded-file {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 12px;
+            background-color: var(--light-bg);
+            border-radius: 4px;
+            margin-bottom: 8px;
+        }
+        
+        .uploaded-file:last-child {
+            margin-bottom: 0;
+        }
+        
+        .uploaded-file-name {
+            font-size: 0.9rem;
+            color: var(--text-color);
+        }
+        
+        .uploaded-file-size {
+            font-size: 0.8rem;
+            color: #6c757d;
+            margin-left: 10px;
+        }
+        
+        .remove-file {
+            background: none;
+            border: none;
+            color: var(--danger-color);
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        
+        /* Loading overlay */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+        
+        .loading-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .loading-spinner {
+            width: 80px;
+            height: 80px;
+            border: 8px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--accent-color);
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        .loading-text {
+            color: white;
+            font-size: 1.2rem;
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        @media (max-width: 768px) {
+            .form-card {
+                padding: 20px;
+            }
+            
+            .form-title {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div>
+            <div class="loading-spinner"></div>
+            <div class="loading-text">Memproses permohonan Anda...</div>
+        </div>
+    </div>
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <i class="fas fa-envelope me-2"></i> info@kln.gov.my
+                </div>
+                <div class="col-md-6 text-end">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-4">
+                    <img src="https://www.kln.gov.my/image/layout_set_logo?img_id=8605014&t=1755688550171" alt="Logo Kementerian Luar Negeri" class="logo">
+                </div>
+                <div class="col-md-8 text-end">
+                    <a href="dashboard.html" class="btn btn-outline-custom">
+                        <i class="fas fa-arrow-left me-2"></i> Kembali ke Dashboard
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Beranda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="dashboard.html">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Form Permohonan</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Layanan</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Kontak</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Form Content -->
+    <div class="form-container">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="form-card">
+                        <h2 class="form-title">Form Permohonan Blacklist</h2>
+                        
+                        <form id="blacklistForm">
+                            <!-- Informasi Pemohon -->
+                            <div class="form-section">
+                                <h3 class="section-title">Informasi Pemohon</h3>
+                                
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="applicantName" class="form-label">Nama Lengkap</label>
+                                        <input type="text" class="form-control" id="applicantName" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="applicantId" class="form-label">Nomor Identitas (KTP/Paspor)</label>
+                                        <input type="text" class="form-control" id="applicantId" required>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="applicantEmail" class="form-label">Email</label>
+                                        <input type="email" class="form-control" id="applicantEmail" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="applicantPhone" class="form-label">Nomor Telepon</label>
+                                        <input type="tel" class="form-control" id="applicantPhone" required>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="applicantAddress" class="form-label">Alamat Lengkap</label>
+                                    <textarea class="form-control" id="applicantAddress" rows="3" required></textarea>
+                                </div>
+                            </div>
+                            
+                            <!-- Informasi Target -->
+                            <div class="form-section">
+                                <h3 class="section-title">Informasi Target Blacklist</h3>
+                                
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="targetName" class="form-label">Nama Lengkap Target</label>
+                                        <input type="text" class="form-control" id="targetName" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="targetId" class="form-label">Nomor Identitas Target (KTP/Paspor)</label>
+                                        <input type="text" class="form-control" id="targetId" required>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="targetNationality" class="form-label">Kewarganegaraan Target</label>
+                                        <select class="form-select" id="targetNationality" required>
+                                            <option value="" selected disabled>Pilih Kewarganegaraan</option>
+                                            <option value="indonesia">Indonesia</option>
+                                            <option value="malaysia">Malaysia</option>
+                                            <option value="singapore">Singapura</option>
+                                            <option value="thailand">Thailand</option>
+                                            <option value="other">Lainnya</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="targetOccupation" class="form-label">Pekerjaan Target</label>
+                                        <input type="text" class="form-control" id="targetOccupation">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Alasan Permohonan -->
+                            <div class="form-section">
+                                <h3 class="section-title">Alasan Permohonan</h3>
+                                
+                                <div class="mb-3">
+                                    <label for="subject" class="form-label">Subjek Permohonan</label>
+                                    <input type="text" class="form-control" id="subject" placeholder="Contoh: Permohonan Blacklist atas nama John Doe" required>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="reason" class="form-label">Alasan Permohonan</label>
+                                    <textarea class="form-control" id="reason" rows="5" placeholder="Jelaskan secara detail alasan Anda mengajukan permohonan blacklist" required></textarea>
+                                    <div class="form-text">Berikan informasi yang lengkap dan jelas mengenai alasan permohonan blacklist</div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="incidentDate" class="form-label">Tanggal Kejadian</label>
+                                    <input type="date" class="form-control" id="incidentDate" required>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="incidentLocation" class="form-label">Lokasi Kejadian</label>
+                                    <input type="text" class="form-control" id="incidentLocation" placeholder="Contoh: Jakarta, Indonesia" required>
+                                </div>
+                            </div>
+                            
+                            <!-- Dokumen Pendukung -->
+                            <div class="form-section">
+                                <h3 class="section-title">Dokumen Pendukung</h3>
+                                
+                                <div class="mb-3">
+                                    <label class="form-label">Upload Dokumen Pendukung</label>
+                                    <div class="file-upload-wrapper">
+                                        <input type="file" id="supportingDocuments" multiple>
+                                        <label for="supportingDocuments" class="file-upload-label">
+                                            <i class="fas fa-cloud-upload-alt"></i> Klik untuk upload atau seret file ke sini
+                                        </label>
+                                    </div>
+                                    <div class="form-text">Format yang didukung: PDF, JPG, PNG. Maksimal 5 file dengan ukuran maksimal 2MB per file</div>
+                                    <div id="uploadedFiles" class="uploaded-files"></div>
+                                </div>
+                            </div>
+                            
+                            <!-- Pernyataan -->
+                            <div class="form-section">
+                                <h3 class="section-title">Pernyataan</h3>
+                                
+                                <div class="mb-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="statement1" required>
+                                        <label class="form-check-label" for="statement1">
+                                            Saya menyatakan bahwa semua informasi yang saya berikan adalah benar dan dapat dipertanggungjawabkan.
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="statement2" required>
+                                        <label class="form-check-label" for="statement2">
+                                            Saya menyetujui syarat dan ketentuan yang berlaku untuk permohonan blacklist ini.
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="statement3" required>
+                                        <label class="form-check-label" for="statement3">
+                                            Saya memahami bahwa memberikan informasi palsu adalah tindakan ilegal dan dapat dikenakan sanksi hukum.
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Submit Button -->
+                            <div class="d-flex justify-content-between mt-4">
+                                <a href="dashboard.html" class="btn btn-outline-custom">Batal</a>
+                                <button type="submit" class="btn btn-custom">
+                                    <i class="fas fa-paper-plane me-2"></i> Kirim Permohonan
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>Tentang Kami</h5>
+                    <p>Kementerian Luar Negeri Malaysia bertanggungjawab dalam menguruskan hubungan luar negara Malaysia serta mewakili Malaysia di peringkat antarabangsa.</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Pautan Pantas</h5>
+                    <ul>
+                        <li><a href="#">Laman Web Rasmi</a></li>
+                        <li><a href="#">Hubungi Kami</a></li>
+                        <li><a href="#">Soalan Lazim</a></li>
+                        <li><a href="#">Panduan Perjalanan</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Maklumat Hubungan</h5>
+                    <p><i class="fas fa-map-marker-alt me-2"></i> Wisma Putra, No. 1, Jalan Wisma Putra, Precint 2, 62602 Putrajaya, Malaysia</p>
+                    <p><i class="fas fa-phone me-2"></i> +603-8000 8000</p>
+                    <p><i class="fas fa-envelope me-2"></i> info@kln.gov.my</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div class="copyright">
+        <div class="container">
+            <p>&copy; 2023 Hak Cipta Terpelihara Kementerian Luar Negeri Malaysia</p>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div id="notification" class="notification"></div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-storage-compat.js"></script>
+    
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyCQLLM5_c85jxnTXn6J-R_jdLgKxo-VO_o",
+            authDomain: "blacklist-e75b3.firebaseapp.com",
+            projectId: "blacklist-e75b3",
+            storageBucket: "blacklist-e75b3.firebasestorage.app",
+            messagingSenderId: "263946397404",
+            appId: "1:263946397404:web:ef0ca956ccbe351971b619",
+            measurementId: "G-WDJRPCVEXQ"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+        const storage = firebase.storage();
+
+        // Show notification
+        function showNotification(message, type) {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.className = 'notification ' + type;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 5000);
+        }
+
+        // Show/hide loading overlay
+        function showLoading(show) {
+            const loadingOverlay = document.getElementById('loadingOverlay');
+            if (show) {
+                loadingOverlay.classList.add('active');
+            } else {
+                loadingOverlay.classList.remove('active');
+            }
+        }
+
+        // Check if user is logged in
+        auth.onAuthStateChanged((user) => {
+            if (!user) {
+                // User is not signed in, redirect to login page
+                window.location.href = 'index.html';
+            } else {
+                // Load user data
+                document.getElementById('applicantName').value = user.displayName || '';
+                document.getElementById('applicantEmail').value = user.email || '';
+                
+                // Load user data from Firestore
+                db.collection('users').doc(user.uid).get()
+                    .then((doc) => {
+                        if (doc.exists) {
+                            const userData = doc.data();
+                            if (userData.phone) {
+                                document.getElementById('applicantPhone').value = userData.phone;
+                            }
+                            if (userData.address) {
+                                document.getElementById('applicantAddress').value = userData.address;
+                            }
+                            if (userData.idNumber) {
+                                document.getElementById('applicantId').value = userData.idNumber;
+                            }
+                        }
+                    })
+                    .catch((error) => {
+                        console.error('Error loading user data:', error);
+                    });
+            }
+        });
+
+        // File upload handling
+        const fileInput = document.getElementById('supportingDocuments');
+        const uploadedFilesContainer = document.getElementById('uploadedFiles');
+        const uploadedFiles = [];
+        
+        fileInput.addEventListener('change', (e) => {
+            const files = e.target.files;
+            
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                
+                // Check file size (max 2MB)
+                if (file.size > 2 * 1024 * 1024) {
+                    showNotification(`File ${file.name} terlalu besar. Maksimal 2MB per file.`, 'error');
+                    continue;
+                }
+                
+                // Check file type
+                if (!file.type.match('image.*') && file.type !== 'application/pdf') {
+                    showNotification(`File ${file.name} tidak didukung. Hanya PDF, JPG, dan PNG yang diperbolehkan.`, 'error');
+                    continue;
+                }
+                
+                // Add file to array
+                uploadedFiles.push(file);
+                
+                // Display uploaded file
+                const fileElement = document.createElement('div');
+                fileElement.className = 'uploaded-file';
+                fileElement.innerHTML = `
+                    <div>
+                        <span class="uploaded-file-name">${file.name}</span>
+                        <span class="uploaded-file-size">(${(file.size / 1024).toFixed(2)} KB)</span>
+                    </div>
+                    <button type="button" class="remove-file" data-index="${uploadedFiles.length - 1}">
+                        <i class="fas fa-times"></i>
+                    </button>
+                `;
+                
+                uploadedFilesContainer.appendChild(fileElement);
+            }
+            
+            // Reset file input
+            fileInput.value = '';
+        });
+
+        // Remove uploaded file
+        uploadedFilesContainer.addEventListener('click', (e) => {
+            if (e.target.closest('.remove-file')) {
+                const index = parseInt(e.target.closest('.remove-file').getAttribute('data-index'));
+                uploadedFiles.splice(index, 1);
+                
+                // Refresh the display
+                uploadedFilesContainer.innerHTML = '';
+                uploadedFiles.forEach((file, i) => {
+                    const fileElement = document.createElement('div');
+                    fileElement.className = 'uploaded-file';
+                    fileElement.innerHTML = `
+                        <div>
+                            <span class="uploaded-file-name">${file.name}</span>
+                            <span class="uploaded-file-size">(${(file.size / 1024).toFixed(2)} KB)</span>
+                        </div>
+                        <button type="button" class="remove-file" data-index="${i}">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    `;
+                    
+                    uploadedFilesContainer.appendChild(fileElement);
+                });
+            }
+        });
+
+        // Form submission
+        const blacklistForm = document.getElementById('blacklistForm');
+        blacklistForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const user = auth.currentUser;
+            if (!user) {
+                showNotification('Anda harus login terlebih dahulu', 'error');
+                return;
+            }
+            
+            // Collect form data
+            const formData = {
+                userId: user.uid,
+                applicantName: document.getElementById('applicantName').value,
+                applicantId: document.getElementById('applicantId').value,
+                applicantEmail: document.getElementById('applicantEmail').value,
+                applicantPhone: document.getElementById('applicantPhone').value,
+                applicantAddress: document.getElementById('applicantAddress').value,
+                targetName: document.getElementById('targetName').value,
+                targetId: document.getElementById('targetId').value,
+                targetNationality: document.getElementById('targetNationality').value,
+                targetOccupation: document.getElementById('targetOccupation').value,
+                subject: document.getElementById('subject').value,
+                reason: document.getElementById('reason').value,
+                incidentDate: document.getElementById('incidentDate').value,
+                incidentLocation: document.getElementById('incidentLocation').value,
+                status: 'pending',
+                createdAt: firebase.firestore.FieldValue.serverTimestamp()
+            };
+            
+            // Show loading overlay
+            showLoading(true);
+            
+            // Save to Firestore
+            db.collection('blacklistApplications').add(formData)
+                .then((docRef) => {
+                    // Upload files if any
+                    if (uploadedFiles.length > 0) {
+                        const uploadPromises = [];
+                        
+                        uploadedFiles.forEach((file, index) => {
+                            const storageRef = storage.ref(`blacklistDocuments/${docRef.id}/${file.name}`);
+                            const uploadTask = storageRef.put(file);
+                            
+                            uploadPromises.push(
+                                uploadTask.then((snapshot) => {
+                                    return snapshot.ref.getDownloadURL();
+                                }).then((downloadURL) => {
+                                    // Save file info to Firestore
+                                    return db.collection('blacklistApplications').doc(docRef.id)
+                                        .collection('documents').add({
+                                            name: file.name,
+                                            size: file.size,
+                                            type: file.type,
+                                            url: downloadURL,
+                                            uploadedAt: firebase.firestore.FieldValue.serverTimestamp()
+                                        });
+                                })
+                            );
+                        });
+                        
+                        return Promise.all(uploadPromises).then(() => docRef.id);
+                    }
+                    return docRef.id;
+                })
+                .then((applicationId) => {
+                    // Add to user history
+                    return db.collection('userHistory').add({
+                        userId: user.uid,
+                        title: 'Mengajukan permohonan blacklist',
+                        description: `Anda mengajukan permohonan blacklist untuk ${formData.targetName}`,
+                        timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                    }).then(() => applicationId);
+                })
+                .then((applicationId) => {
+                    // Prepare payment data
+                    const paymentData = {
+                        applicationId: applicationId,
+                        applicantName: formData.applicantName,
+                        applicantEmail: formData.applicantEmail,
+                        applicantPhone: formData.applicantPhone,
+                        applicantAddress: formData.applicantAddress,
+                        targetName: formData.targetName,
+                        targetId: formData.targetId,
+                        targetNationality: formData.targetNationality,
+                        subject: formData.subject
+                    };
+                    
+                    // Store payment data in sessionStorage
+                    sessionStorage.setItem('paymentData', JSON.stringify(paymentData));
+                    
+                    // Hide loading overlay
+                    showLoading(false);
+                    
+                    // Redirect to payment page
+                    window.location.href = 'payment.html';
+                })
+                .catch((error) => {
+                    console.error('Error submitting form:', error);
+                    showNotification('Gagal mengirim permohonan: ' + error.message, 'error');
+                    
+                    // Hide loading overlay
+                    showLoading(false);
+                });
+        });
+    </script>
+</body>
+</html>
